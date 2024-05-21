@@ -27,7 +27,23 @@ public class BubbleSort {
                     .mapToInt(Integer::intValue)
                     .toArray();
 
-            sortedArray = bubbleSort(inputArray);
+            System.out.println("Select Sorting technique");
+            System.out.println("1. Normal Bubble Sort");
+            System.out.println("2. Recursive Bubble Sort");
+
+            int choice = Integer.parseInt(reader.readLine());
+
+            switch (choice) {
+                case 1:
+                    sortedArray = bubbleSort(inputArray);
+                    break;
+                case 2:
+                    sortedArray = recursiveBubbleSort(inputArray, inputArray.length);
+                    break;
+                default:
+                    sortedArray = inputArray;
+                    break;
+            }
 
             System.out.println("Sorted Array : " + Arrays.toString(sortedArray));
 
@@ -36,6 +52,16 @@ public class BubbleSort {
         }
     }
 
+    /*
+     * for i=arraylenght ,i--
+     * for j=i+1 till i
+     * check j and j+1 min and swap if necessary
+     * For sorted array use a check swap flag . In the loop if swap happens then set
+     * the flag to true .
+     * But if swap does not happen than the flag remains false and array is sorted ,
+     * so break out of loop.
+     * Benefit is for sorted array the time complexity is O(n)
+     */
     public static int[] bubbleSort(int unsortedArray[]) {
         boolean checkSwap;
         for (int i = unsortedArray.length - 1; i >= 0; i--) {
@@ -61,5 +87,28 @@ public class BubbleSort {
         inputArray[i] = inputArray[j];
         inputArray[j] = temp;
         return true;
+    }
+
+    /*
+     * Base case if array size is 1 return
+     * Do a pass , find the max using swapping then you get the max value at last
+     * field
+     * Recursively call function with function(array,arraylength-1)
+     */
+    public static int[] recursiveBubbleSort(int inputArray[], int length) {
+
+        if (length == 1) {
+            return inputArray;
+        }
+
+        for (int i = 0; i < length - 1; i++) {
+            if (inputArray[i] > inputArray[i + 1]) {
+                swap(i, i + 1, inputArray);
+            }
+        }
+
+        // Recur for remaining elements
+        return recursiveBubbleSort(inputArray, length - 1);
+
     }
 }

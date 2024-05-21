@@ -80,7 +80,8 @@ public class SelectionSort {
      * Stable Selection Sort
      * Check this link why selection sort is not stable :
      * https://www.geeksforgeeks.org/stable-selection-sort/
-     * Basically handling duplicates
+     * Basically handling duplicates and shifting elements to the right and placing
+     * the minelement at the first place
      * Similar time complexity with for(for+while) = O(n²)
      */
     public static int[] stableSelectionSort(int unsortedArray[]) {
